@@ -1,0 +1,259 @@
+\section{Vector Fields and QED I - Classical E\&M, Maxwell Equations, Gauge Invariance, Coupling to Matter}
+
+We move to the next nontrivial representation of the Lorentz group! Namely the $(\frac{1}{2}, \frac{1}{2})$ representation with spin-1, which transforms like a 4-vector. You have already encountered this previously in the form of the photon in E\&M. Today we will start from classical electromagnetism, and derive the Maxwell equations from an action principle.
+
+\subsection{The Maxwell Equations}
+We can write Maxwell's equations compactly in a Lorentz covariant way:
+\begin{equation}\label{eq:maxwell1}
+    \p_\mu F^{\mu\nu} = j^\nu
+\end{equation}
+\begin{equation}\label{eq:maxwell2}
+    \e^{\mu\nu\lambda\rho}\p_\nu F_{\lambda \rho} = 0
+\end{equation}
+with $F_{\mu\nu} = -F_{\nu\mu}$ the antisymmetric Maxwell stress tensor, with $\frac{4 \cdot 3}{2} = 6$ components; 3 for the electric and 3 for the magnetic field. In particular:
+\begin{equation}
+    \begin{split}
+        F_{0i} &= E_i
+        \\ F_{ij} &= -\e_{ijk}B^k
+    \end{split}
+\end{equation}
+Indeed, let's see that this compact form of the Maxwell equations indeed reproduces the more familiar form. Looking at Eq. \eqref{eq:maxwell1} for $\nu = 0$:
+\begin{equation}
+    \rho = j^0 = \p_i F^{i0} = -\p_i F^{0i} = (-1)^2 \p_i F_{01} = \nabla \cdot \v{E}
+\end{equation}
+which is Gauss' Law. For $\nu = i$:
+\begin{equation}
+    j^i = \p_0 F^{0i} + p_j F^{ji} = -\p_0 E_i - \e_{ijk}\p_j B_k = -\dot{E}_i + \e_{ijk}\p_j B_k
+\end{equation}
+or if we look at all components:
+\begin{equation}
+    \v{j} = -\dot{\v{E}} + \nabla \times \v{E}
+\end{equation}
+which is Ampere's Law.
+
+Now looking at Eq. \eqref{eq:maxwell2} for $\mu = 0$:
+\begin{equation}
+    0 = \e^{ijk}\p_i F_{jk} = -\e^{ijk}\e_{jkl}\p_i B^l = -\delta^{i}_l \p_i B^l \propto \nabla \cdot \v{B} \implies 0 = \nabla \cdot \v{B}
+\end{equation}
+which gives the Magnetic Gauss' law. Finally, for $\mu = i$:
+\begin{equation}
+    0 = \e^{i\nu \lambda \rho}\p_\nu F_{\lambda \rho} = \e^{i0jk}\p_0 F_{jk} + \e^{ij0k}\p_j F_{0k} = \e^{ijk}\e_{jkl}\p_0 B^l + 2\e^{ijk}\p_j E_k = 2\delta^{i}_l \p_0 B^l + 2\e^{ijk}\p_j E_k \implies \dot{\v{B}} + \nabla \times \v{E} = 0
+\end{equation}
+note in the second equality we have used the requirement that one of the indices be time (as the Levi-Civita tensor is only nonzero when all four indices are different.) The last equation is Faraday's Law, and so we have reproduced the four familiar versions of Maxwell's Law.
+
+One can check that $F_{\mu\nu}$ transforms like a tensor under Lorentz transformations:
+\begin{equation}
+    F_{\mu\nu}(x) \to \Lambda_{\mu}^{\sp\alpha}\Lambda_{\nu}^{\sp\mu}F_{\alpha\beta}(\Lambda^{-1}x)
+\end{equation}
+Intuitively, under a boost charges become currents and so we transform between the tensor components. Writing things in terms of the electromagnetic tensor makes lorentz invariance manifest, provided $j^\mu$ is a Lorentz 4-vector. Another feature - observe that the current $j^\mu$ also has to be conserved:
+\begin{equation}
+    \p_\mu j^\mu = \p_\mu \p_\nu F^{\mu\nu} = 0
+\end{equation}
+where we conclude things are zero because the derivatives are symmetric while $F^{\mu\nu}$ is antisymmetric. This property is very reminiscent of Noether's theorem - it gives us the intuition that the electric/magnetic fields will want to couple to field theories with a $U(1)$ conservation law.
+
+\subsection{Action Principle for Free Maxwell Theory}
+Writing things in terms of $\v{E}, \v{B}$ is not great because they transform into each other under Lorentz boosts (the equations thus do not look Lorentz invariance). There is a further issue. The Magnetic Gauss' Law $\nabla \cdot \v{B} = 0$ implies that, locally, $\v{B}$ is a curl:
+\begin{equation}
+    \v{B} = \nabla \times \v{A}
+\end{equation}
+or equivalently:
+\begin{equation}
+    F_{ij} = \p_i A_j - \p_j A_i.
+\end{equation}
+Similarly, Faraday's Law says:
+\begin{equation}
+    0 = \nabla \times (\v{E} + \dot{\v{A}})
+\end{equation}
+which tells us that locally, $\v{E} + \dot{\v{A}}$ is a gradient:
+\begin{equation}
+    \v{E} + \dot{\v{A}} = \nabla A_0
+\end{equation}
+or:
+\begin{equation}
+    F_{i0} = \p_i A_0 - \p_0 A_i
+\end{equation}
+In summary:
+\begin{equation}
+    F_{\mu\nu} = \p_\mu A_\nu - \p_\nu A_\mu
+\end{equation}
+Writing the field strength in this way, Eq. \eqref{eq:maxwell2} is now automatic:
+\begin{equation}
+    \e^{\mu\nu\lambda\rho}\p_\nu F_{\lambda\rho} = 2\e^{\mu\nu\lambda\rho}\p_\nu\p_\lambda A_\rho = 0
+\end{equation}
+where we conclude that this vanishes as $\e^{\mu\nu\lambda\rho}$ is antisymmetric while $\p_\nu\p_\lambda$ is symmetric. Where does Eq. \eqref{eq:maxwell1} come from in this perspective? We view it as arising as the equation of motion of an action. So, let's try to find an action principle for Maxwell's equations. Let's start without charged matter; $\p_\mu F^{\mu\nu} = 0$. Schematically, it looks like:
+\begin{equation}
+    0 = \p_\mu F^{\mu\nu} \sim \p\p A \sim \text{Klein-Gordon} \implies \mathcal{L} = \frac{1}{2}A\p\p A
+\end{equation}
+Let's be a little more precise. There are only two possible index contractions:
+\begin{enumerate}[(a)]
+    \item $\p_\mu A_\nu \p^\mu A^\nu$
+    \item $\p_\mu A^\mu \p_\nu A^\nu$
+    \item There is an apparent final contender $\p_\mu A_\nu \p^\nu A^\mu$, but we can integrate by parts to swap derivatives, which makes this term equivalent to (b).
+\end{enumerate}
+Thus, we have:
+\begin{equation}
+    S = \frac{1}{2}a(\p_\mu A_\nu)^2 + b(\p_\mu A^\mu)^2
+\end{equation}
+so then the variation becomes:
+\begin{equation}
+    \delta S = -\int a \p_\mu A_\nu \p^\mu \delta A^\nu + b \p_\mu A^\mu \p_\nu \delta A^\nu
+\end{equation}
+now integrating by parts to isolate the variation:
+\begin{equation}
+    \delta S = \int \delta A_\nu [a\p_\mu \p^\mu A_\nu + b\p^\mu \p_\nu A_\mu]
+\end{equation}
+Hence $\delta S = 0$ for any variation $\delta A_\nu$ forces the term in brackets to be zero, i.e.:
+\begin{equation}
+    a\p_\mu(\p^\mu A^\nu) + b\p_\mu (\p^\nu A^\mu) = 0
+\end{equation}
+This indeed yields the equation of motion:
+\begin{equation}
+    0 = \p_\mu F^{\mu\nu} = \p_\mu (\p^\mu A^\nu - \p^\nu A^\mu)
+\end{equation}
+in the case that $b = -a$. Thus, the action that produces Eq. \eqref{eq:maxwell1} is:
+\begin{equation}
+    S = -\frac{1}{2}\int (\p_\mu A_\nu)^2 - (\p_\mu A^\mu)^2
+\end{equation}
+Integrating by parts the second term to swap the derivatives $\p_\mu A^\mu \p_\nu A^\nu = \p_\nu A^\mu \p_\mu A^\nu$, we obtain:
+\begin{equation}
+    S = -\frac{1}{2}\int \p^\mu A^\nu(\p_\mu A_\nu - \p_\nu A_\mu) = -\frac{1}{2}\int \p^\mu A^\nu F_{\mu\nu}
+\end{equation}
+Since $\p^\mu A^\nu$ is contracted with an antisymmetric tensor, we can replace it with its antisymmetric part, which is just the maxwell tensor again:
+\begin{equation}
+    \p^\mu A^\nu \stackrel{\text{antisymmetric}}{=} \frac{1}{2}(\p^\mu A^\nu - \p^\nu A^\mu) = \frac{1}{2}F^{\mu\nu}
+\end{equation}
+and thus:
+\begin{equation}
+    S = -\frac{1}{4}\int d^4x F_{\mu\nu}F^{\mu\nu}
+\end{equation}
+we have thus obtained an action principle for the Maxwell equations with no matter.
+
+\subsection{Adding Charged Matter}
+What we really want is not $\p_\mu F^{\mu\nu} = 0$, but rather $\p_\mu F^{\mu\nu} = j^\nu$, or equivalently:
+\begin{equation}
+    \p_\mu F^{\mu\nu} - j^\nu = 0
+\end{equation}
+We already have the first term from $\delta S$ that we constructed above, we just need another term in the action for which $\delta S'/\delta A_\nu$ gives the current. We need:
+\begin{equation}
+    \delta S' = -\int \delta A_\nu j^\nu \implies S' = -\int A_\nu j^\nu
+\end{equation}
+and thus the total action is:
+\begin{equation}
+    \boxed{S[A] = -\int d^4x \frac{1}{4}(F_{\mu\nu})^2 + A_\mu j^\mu}
+\end{equation}
+with the additional equation:
+\begin{equation}
+    \boxed{F_{\mu\nu} = \p_\mu A_\nu - \p_\nu A_\mu}
+\end{equation}
+from these we can reproduce everything from classical electromagnetism.
+
+\subsection{Gauge Invariance}
+In addition to Lorentz and translation symmetry, the above theory has a strange ``symmetry'' known as Gauge invariance (not a true symmetry, just an invariance of the action). This symmetry acts on the vector field as follows:
+\begin{equation}
+    A_\mu(x) \to A_\mu(x) + \p_\mu \lambda(x)
+\end{equation}
+where $\lambda(x)$ is an \emph{arbitrary} scalar function of spacetime. How do we see that this indeed leaves the action invariant? Indeed:
+\begin{equation}
+    F_{\mu\nu} = \p_\mu A_\nu - \p_\nu A_\mu \to \p_\mu A_\nu - \p_\mu A_\mu - (\p_\mu \p_\nu \lambda - \p_\nu \p_\mu \lambda) = \p_\mu A_\nu - \p_\mu A_\mu = F_{\mu\nu}
+\end{equation}
+where the term in brackets vanishes due to the symmetry of the derivatives. Writing the field strength as a curl hence picks up a kind of redundancy. Moreover, we can see that the second part of the action is also invariant:
+\begin{equation}
+    -\int A_\mu j^\mu \to -\int A_\mu j^\mu + \p_\mu \lambda j^\mu \stackrel{\text{IBP}}{=} -\int A_\mu j^\mu - \lambda \p_\mu j^\mu = -\int A_\mu j^\mu
+\end{equation}
+where in the last equality we use that $\p_\mu j^\mu = 0$, as we couple to conserved currents.
+
+This is a bit different from a symmetry - it should be thought of as a redundancy of our description. Several different choices of $A_\mu$ can give rise to the same physics. Loosely, we can think of it as one ``component'' of $A_\mu$ does not appear in the action. One can fix this redundancy by choosing/fixing a gauge.
+\begin{enumerate}[(a)]
+    \item $A_0 = 0$ (Temporal gauge)
+    \item $\nabla \cdot \v{A} = 0$ (Coloumb gauge)
+    \item $\p_\mu A^\mu = 0$ (Lorenz gauge)
+\end{enumerate}
+To understand what is left of the dynamics of our system, let us pick one gauge and then study what is left. For now, we will choose the Coloumb gauge, which is one that you may have already played with in your E\&M class (it is a useful choice for working with electrostatics). Let's see the impact of this choice on the action.
+\begin{equation}
+    \begin{split}
+        S = -\frac{1}{4}\int F^2 &= -\frac{1}{4}\int -2F_{0i}F^{0i} - F_{ij}F^{ij} 
+        \\ &= \int \frac{1}{2}(\p_0 A_i - \p_i A_0)(\p_0 A_i - \p_i A_0) + \frac{1}{2}\p_i A_j(\p_i A_j - \p_j A_i)
+        \\ &= \int \frac{1}{2}(\p_0 A_i)^2 + \frac{1}{2}(\p_i A_0)^2 - \frac{1}{2}(\p_i A_j)^2
+        \\ &= \int \frac{1}{2}A_i(-\p_0^2 + \p_j^2)A_i - \frac{1}{2}A_0\nabla^2 A_0
+    \end{split}
+\end{equation}
+where in the third line we note that the use of IBP gives $\p_i A_i = \nabla \cdot \v{A} = 0$ by our choice of gauge for some of the terms. We see here that the equation of motion for $A_0$ is:
+\begin{equation}
+    \nabla^2 A^0 = j^0
+\end{equation}
+i.e. $A^0$ in this gauge is not a propagating degree of freedom. It's fixed by the charge density profile.
+
+To review; we started with $A_\mu$ which has 4 degrees of freedom. This was a bit redundant, because the action was invariant under a transformation $A_\mu \to A_\mu + \p_\mu \lambda$. We fixed a gauge (Coloumb) so that we had $A_\mu, \nabla \cdot \v{A} = 0$, i.e. we now have 3 degrees of freedom. This gave an additional constraint, namely $A^0$ being fixed by $j^0$. Hence by the end we were left with 2 degrees of freedom. This is what we expected; 2 is the DoFs for a massless field (the 2 helicities), as you saw on a former homework.
+
+\subsection{Coupling Maxwell to Dirac}
+So, we have our Maxwell theory:
+\begin{equation}
+    S = -\int d^4x \frac{1}{4e^2}(F_{\mu\nu})^2 + A_\mu j^\mu
+\end{equation}
+where we have renormalized $A \to eA$ implying $\p_\mu F^{\mu\nu} = ej^\nu$. It needs to be coupled to a conserved current $\p_\mu j^\mu = 0$. Dirac fermions have precisely such a current. Namely, with the action:
+\begin{equation}
+    S = \int \bar{\psi}(i\slashed{\p} - m)\psi
+\end{equation}
+we have the symmetry $\psi \to e^{i\lambda}\psi$ which the Noether procedure gives the current:
+\begin{equation}
+    j^\mu = \bar{\psi}\gamma^\mu \psi
+\end{equation}
+The full Maxwell + matter (Dirac) action is thus:
+\begin{equation}
+    S = \int \bar{\psi}(i\slashed{\p} - m)\psi - A_\mu \bar{\psi}\gamma^\mu \psi - \frac{1}{4e^2}(F_{\mu\nu})^2
+\end{equation}
+Something we can do in this theory (and something that one often does) is to package the interaction $A_\mu \bar{\psi}\gamma^\mu \psi$ into the derivative:
+\begin{equation}
+    \boxed{S = \int \bar{\psi}(i\slashed{D} - m)\psi- \frac{1}{4e^2}(F_{\mu\nu})^2}
+\end{equation}
+where we have defined a covariant derivative:
+\begin{equation}
+    D_\mu = \p_\mu + iA_\mu
+\end{equation}
+so then:
+\begin{equation}
+    \slashed{D} \psi = \gamma^\mu(\p_\mu + iA_\mu)\psi = \slashed{\p}\psi + iA_\mu \gamma^\mu \psi
+\end{equation}
+
+So, we have our action for QED! We have our Dirac theory, our Maxwell theory, and then our interaction, which leads to many interesting effects. The presence of this interaction makes the theory unsolvable, but quite interesting and subtle.
+
+We can ask why did we package the derivative in this strange way. We do this because this coupled theory still retains the gauge invariance of Maxwell theory. Namely, the action is invariant under the transformations:
+\begin{equation}
+    \begin{split}
+        A_\mu &\to A_\mu + \p_\mu \lambda(x)
+        \\ \psi &\to e^{i\lambda(x)}\psi
+    \end{split}
+\end{equation}
+Interestingly, this is still an invariance of the action when $\lambda(x)$ is a fully arbitrary (real) scalar function of spacetime. Let's check that this is true. The $F^2$ invariance carries over from the maxwell theory, and $m\bar{\psi}\psi$ is also easy to see (the $e^{\pm i\lambda}$s cancel). What about the kinetic term $\bar{\psi}i\slashed{D}\psi$? Well, looking at how the covariant derivative transforms:
+\begin{equation}
+    \begin{split}
+        D_\mu \psi = \p_\mu \psi + iA_\mu \psi &\to \p_\mu (e^{i\lambda(x)}\psi) + iA_\mu e^{i\lambda(x)}\psi - i\p_\mu \lambda e^{i\lambda(x)}\psi
+        \\ &= i\p_\mu \lambda e^{i\lambda}\psi - i\p_\mu \lambda e^{i\lambda}\psi + e^{i\lambda}\p_\mu \psi + e^{i\lambda}iA_\mu \psi = e^{i\lambda(x)}D_\mu \psi
+    \end{split}
+\end{equation}
+Thus we see that $D_\mu \psi \to e^{i\lambda(x)}D_\mu\psi$, which is why we wanted to package things this way to get this easy transformation rule. Thus the kinetic term is easily seen to be invariant:
+\begin{equation}
+    \bar{\psi}\gamma^\mu D_\mu \psi \to \bar{\psi}e^{-i\lambda}e^{i\lambda}\gamma^\mu D_\mu \psi = \bar{\psi}\gamma^\mu D_\mu \psi
+\end{equation}
+Thus - as in the case with pure Maxwell theory, it is still true that the photon carries less degrees of freedom than as it first appears. The degrees of freedom available here will be the 2 helicities of the photon and the Dirac field.
+
+Note; here we have chosen to couple Dirac with Maxwell, but we can choose any theory with a conserved current; for example the scalar theory:
+\begin{equation}
+    S = \int (\p\phi)^2 + (\p\phi)^4
+\end{equation}
+has the shift symmetry $\phi \to \phi + c$. In this model the covariant derivative will look different. We have the gauge transformations:
+\begin{equation}
+    \begin{split}
+        \phi &\to \phi + \lambda(x)
+        \\ A_\mu &\to A_\mu - \p_\mu \lambda(x)
+    \end{split}
+\end{equation}
+So then the correct way to make a covariant derivative is:
+\begin{equation}
+    D_\mu \phi = \p_\mu \phi - A_\mu \to \p_\mu \phi - A_\mu
+\end{equation}
+So we have the action:
+\begin{equation}
+    S = -\int (D\phi)^2 + (D\phi)^4 + \frac{1}{4e^2}F^2
+\end{equation}
+which actually turns out to describe a superconductor! We won't discuss this in lecture in too much detail, but you may see it show up on a future homework.

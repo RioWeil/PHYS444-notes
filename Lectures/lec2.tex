@@ -1,0 +1,182 @@
+\section{Fermions - Dirac Fermions}
+\subsection{Review of Representations}
+A general lorentz-invariant field is labelled by 2 $\mf{su}(2)$ quantum numbers $(j^-, j^+)$. For example, $\phi \in (0, 0)$, $A_\mu \in (\frac{1}{2}, \frac{1}{2})$, $\psi_R \in (0, \frac{1}{2})$, $\psi_L \in (\frac{1}{2}, 0)$. The matrices $\sigma^\mu = (\II, \sigma^i)$ provide an explicit map from $\psi_{Ra}^\dag\psi_{Rb} \in (0, \frac{1}{2}) \otimes (\frac{1}{2}, 0) = (\frac{1}{2}, \frac{1}{2})$ to $A_\mu \equiv \psi_R^\dag \sigma_\mu \psi_R$ (you will look at this in more detail in PS1). This gave us the free-field/Gaussian Lagrangian for $\psi_R$s of the form:
+\begin{equation}
+    \mathcal{L}_{\text{Weyl, R}} = i\psi_R^\dag \sigma^\mu \p_\mu \psi_R.
+\end{equation}
+This is a fine Lagrangian, and you will study it in PS1, and construct its mass term. However, it's not good for describing particles such as the electron, as it is not parity invariant (we saw that parity exchanges $J^+_i \leftrightarrow J^-_i$ (with $J^\pm_i = \frac{1}{2}(J_i + iK_i)$)). Our goal today is to construct the simplest parity invariant theory of spinors. To this end, we will need both $\psi_R$ and $\psi_L$.
+
+\subsection{Parity invariant theory of spinors - kinetic term}
+The Weyl Lagrangian for $\psi_L$ has the form:
+\begin{equation}
+    \mathcal{L}_{\text{Weyl, L}} = i\psi^\dag_L \bar{\sigma}^\mu \p_\mu \psi_L
+\end{equation}
+but the $\bar{\sigma}^\mu$s here are not the same as before - what are they? We could construct them like last time, but we can instead play a trick. Last class we discussed that $\psi_L^* \in (0, \frac{1}{2})$. In PS1, we will show that more precisely, $\sigma_2\psi_L^*$ transforms like $\psi_R$. This tells us that we can again build a 4-vector:
+\begin{equation}
+    (\sigma_2\psi_L^*)^\dag \sigma_\mu \sigma_2 \psi_L^* = \psi_L^T\sigma_2\sigma_\mu\sigma_2\psi_L^* = (\psi_L^T \sigma_2 \sigma_\mu \sigma_2 \psi_L^*)^T = -\psi_L^\dag \sigma_2^T\sigma_\mu^T\sigma_2^T\psi_L = -\psi_L^\dag \sigma_2\sigma_\mu^T\sigma_2\psi_L
+\end{equation}
+from which we find that:
+\begin{equation}
+    \bar{\sigma}_\mu = \sigma_2\sigma_\mu^T\sigma_2 = \begin{cases}
+        \II & \text{if $\mu = 0$}
+        \\ -\sigma_i & \text{if $\mu = 1, 2, 3$}
+    \end{cases}
+\end{equation}
+which follows from the fact that $\set{\sigma_i, \sigma_j} = 2\delta_{ij}$ (the Paulis anticommute unless they are the same). Thus:
+\begin{equation}
+    \bar{\sigma}_\mu = (\II, -\sigma_i)
+\end{equation}
+It is now easy to make the Lagrangian parity invariant! We simply add both the left and right moving kinetic terms with the same coefficent:
+\begin{equation}
+    \mathcal{L}_{\text{kin}} = i\psi_L^\dag \bar{\sigma}^\mu \p_\mu \psi_L + i\psi_R\sigma^\mu \p_\mu \psi_R
+\end{equation}
+
+Does this Lagrangian have additional symmetries? Our guiding principle was Lorentz invariance (and we also have parity and translation invariance). But we have the additional symmetry of $U(1)_L \times U(1)_R$, where $\psi_L \to e^{i\alpha_L}\psi_L$ and $\psi_R \to e^{i\alpha_R}\psi_R$. It's good that we have this if we want this theory to model electrons, because electric charge is conserved (though for electrons we do not need two conserved charges, of course).
+
+\subsection{Parity invariant theory of spinors - mass term}
+The next question we can ask is whether we can construct a mass term for this theory. We can use our group theory logic - if we look at:
+\begin{equation}
+    \psi_R \psi_R \in (0, \frac{1}{2}) \otimes (0, \frac{1}{2}) = (0, \frac{1}{2}\otimes \frac{1}{2}) = (0, 0) + (0, 1)
+\end{equation}
+we see that we should be able to get a scalar part $(0, 0)$ - so we should get a mass term! In PS1, you will find the unique way to build this Weyl/Majorana mass term looks like $\psi_R^T\sigma_2\psi_R$. Now, the issue is this mass term no longer has the $U(1)_R$ symmetry acting in the way we described above. But is there away to add the mass term to the total Lagrangian (for both spinors) such that the theory still has some $U(1)$ symmetry? Indeed, we recall that $\psi_L^* \in (0, \frac{1}{2})$ and so if we replace $\psi_R \to \sigma_2\psi_L^*$ we will be able to recover a $U(1)$ symmetry. Our candidate mass term is:
+\begin{equation}
+    (\sigma_2\psi_L^*)^T \sigma_2 \psi_R = \psi_L^\dag \sigma_2^T \sigma_2 \psi_R =-\psi_L^\dag \psi_R
+\end{equation}
+To make it real we add this to its complex conjugate, so the mass term is:
+\begin{equation}
+    \mathcal{L}_m = -m(\psi_L^\dag \psi_R + \psi_R^\dag\psi_L)
+\end{equation}
+If you doubt the Lorentz invariance of this Lagrangian, you can check that:
+\begin{equation}
+    \begin{split}
+        \delta \psi_L &= i(\theta^i + i\eta^i)\frac{1}{2}\sigma_i\psi_i
+        \\ \delta \psi_L &= i(\theta^i - i\eta^i)\frac{1}{2}\sigma_i\psi_i
+    \end{split}
+\end{equation}
+so at linear order the Lagrangian is invariant under Lorentz transformations/the contributions cancel.
+
+\subsection{The Dirac Fermion}
+We can package left and right moving spinors into a single 4-component spinor:
+\begin{equation}
+    \Psi = \m{\psi_L \\ \psi_R} = \m{\psi_{L, 1} \\ \psi_{L, 2} \\ \psi_{R, 1} \\ \psi_{R, 2}}
+\end{equation}
+which allows us to write the mass term as:
+\begin{equation}
+    \LL_m = -m(\psi_L^\dag \psi_R^\dag)\m{0 & \II \\ \II & 0}\m{\psi_L \\ \psi_R} = -m\Psi^\dag \gamma^0\Psi = -m\bar{\Psi}\Psi
+\end{equation}
+where we have defined $\Psi^\dag\gamma^0 = \bar{\Psi}$. We use this simplifying notation so that we can quickly identify Lorentz invariant quantities. Note that $(\gamma^0)^2 = 1$.
+
+Doing the same with the kinetic term, we have:
+\begin{equation}
+    \begin{split}
+        \mathcal{L}_{\text{kin}} &= i(\psi^\dag_L \psi^\dag_R)\m{\bar{\sigma}^\mu & 0 \\ 0 & \sigma^\mu}\p_\mu \m{\psi_L \\ \psi_R} 
+        \\ &= i\bar{\Psi}\gamma^0 \m{\bar{\sigma}^\mu & 0 \\ 0 & \sigma^\mu}\p_\mu \Psi 
+        \\ &= i\bar{\Psi}\m{0 & \II \\ \II & 0}\m{\bar{\sigma}^\mu & 0 \\ 0 & \sigma^\mu}\p_\mu \Psi
+        \\ &= i\bar{\Psi}\m{0 & \bar{\sigma}^\mu \\ \sigma^\mu & 0}\p_\mu \Psi
+        \\ &= i\bar{\Psi}\gamma^\mu \p_\mu \Psi
+    \end{split}
+\end{equation}
+where in the second equality we use that $(\psi_L^\dag \psi_R^\dag) = (\psi_L^\dag \psi_R^\dag)(\gamma^0)^2 = \bar{\Psi}\gamma^0$. And so the total Lagrangian is that of a Dirac fermion:
+\begin{equation}
+    \boxed{\mathcal{L}_{\text{Dirac}} = \mathcal{L}_{\text{kin}} + \mathcal{L}_{m} = i\bar{\Psi}\gamma^\mu \p_\mu \Psi - m\bar{\Psi}\Psi}
+\end{equation}
+
+\subsection{$\gamma$-matrix anticommutation relations}
+We defined the Dirac $\gamma$-matrices above, which have simple anti-commutation relations:
+\begin{equation}
+    \gamma^\mu\gamma^\nu = \m{0 & \bar{\sigma}^\mu \\ \sigma^\mu & 0}\m{0 & \bar{\sigma}^\nu \\ \sigma^\nu & 0} = \m{\bar{\sigma}^\mu \sigma^\nu & 0 \\ 0 & \sigma^\mu \bar{\sigma}^\nu}
+\end{equation}
+So then:
+\begin{equation}
+    \set{\gamma^\mu, \gamma^\nu} = \gamma^\mu\gamma^\nu + (\mu \leftrightarrow \nu) = \m{\bar{\sigma}^\mu \sigma^\nu + \bar{\sigma}^\nu \sigma^\mu & 0 \\ 0 & \sigma^\mu \bar{\sigma}^\nu + \sigma^\nu \bar{\sigma}^\mu}
+\end{equation}
+If $\mu = \nu = 0$ then we get $2\II$, if $\mu = 0, \nu = i$ then we get 0, and if $\mu = i, \nu = i$ we then have $-\set{\sigma^i, \sigma^j} = -2\delta^{ij}\II$. So at the end of the day, we get:
+\begin{equation}
+    \set{\gamma^\mu, \gamma^\nu} = -2\eta^{\mu\nu}\m{\II & 0 \\ 0 & \II} = -2\eta^{\mu\nu}
+\end{equation}
+Here we really derived this, but there is an alternative approach that Dirac used. In his approach, you instead start with $ \set{\gamma^\mu, \gamma^\nu} = -2\eta^{\mu\nu}$ as the defining property of $\gamma$ matrices; this is what you will explore in PS2. Nevertheless, this anticommutation property will be a very useful one for manipulating/simplifying expressions (without using the explicit form of the $\gamma$ matrices).
+
+\subsection{The Dirac equation}
+By varying the action w.r.t. the spinor, we obtain the EoM:
+\begin{equation}
+    0 = \frac{\delta S}{\delta \bar{\Psi}} \implies \boxed{0 = (i\gamma^\mu\p_\mu - m)\Psi}
+\end{equation}
+this equation \emph{implies} the Klein-Gordon equation. How to see this? Apply $(i\gamma^\mu\p_\mu + m)$ to both sides:
+\begin{equation}
+    0 = (i\gamma^\mu\p_\mu + m)(i\gamma^\mu\p_\mu - m)\Psi = -(m^2 + \gamma^\mu\gamma^\nu \p_\mu \p_\nu)\Psi
+\end{equation}
+Since derivatives commute $\p_\mu\p_\nu$ is symmetric, WLOG we can replace $\gamma^\mu\gamma^\nu$ with the symmetric part:
+\begin{equation}
+    0 = -(m^2 + \frac{1}{2}\set{\gamma^\mu, \gamma^\nu}\p_\mu\p_\nu)\Psi = (\square - m^2)\Psi
+\end{equation}
+where we have used $\frac{1}{2}\set{\gamma^\mu, \gamma^\nu}\p_\mu\p_\nu = -\eta^{\mu\nu}\p_\mu\p_\nu = -\square$. This tells us that there will be many similar structures as we saw in our analysis of the scalar field. Historically, Dirac wanted to find the relativistic version of the Schrodinger equation; to him $\Psi$ was a wavefunction. To us, it is a field.
+
+\subsection{Parity of the Dirac Lagrangian}
+Let us say one more thing about parity; we wanted L.I. when constructing our Lagrangian, but we also wanted it to be parity invariant. Parity flips $\psi_L$ and $\psi_R$, so we expect it to flip:
+\begin{equation}
+    \Psi(t, \v{x}) \leftrightarrow \eta\gamma^0\Psi(t, -\v{x})
+\end{equation}
+with $\eta \in \CC$. We then observe:
+\begin{equation}
+    (P^{-1})^2\Psi P^2 = \eta^2 \gamma^0 \gamma^0 \Psi = \eta^2 \Psi
+\end{equation}
+We may want to say that this should be equal to $\Psi$ because twicefold parity should leave $\Psi$ invariant. But $\Psi$ in itself is not an observable, but $\Psi\Psi$ will be. Thus this gives us the option of $\eta^2 = \pm 1$. Srednicki chooses $\eta = i$. For now, we take $\eta = 1$. Let's check the invariance of the Dirac lagrangian explicitly. We start with the mass term:
+\begin{equation}
+    \mathcal{L}_m(x) = -m\bar{\Psi}(x)\Psi(x) = -m\Psi^\dag(x) \gamma^0 \Psi(x) \to -m\Psi^\dag(Px) (\gamma^0)^\dag \gamma^0 \gamma^0 \Psi(Px) = -m\bar{\Psi}(Px)\Psi(Px) = \mathcal{L}_m(Px)
+\end{equation}
+with $Px = (t, -\v{x})$. Let's also check the kinetic term:
+\begin{equation}
+    \mathcal{L}_{\text{kin}}(x) = i\Psi^\dag(x) \gamma^0\gamma^\mu \p_\mu \Psi(x) \to i\Psi^\dag(Px)\gamma^0 \gamma^0 \gamma^\mu \gamma^0 (\p_0, -\p_i)\Psi(Px)
+\end{equation}
+But now $\gamma^\mu \gamma^0 = \gamma^0 \gamma^\mu$ if $\mu = 0$ and $= -\gamma^0 \gamma^\mu$ if $\mu = 1, 2, 3$, so the signs from the derivative and the gamma matrices cancel, and so:
+\begin{equation}
+    \mathcal{L}_{\text{kin}}(x) = i\Psi^\dag(Px)\gamma^0\gamma^0\gamma^0\gamma^\mu \p_\mu \Psi(Px) = i\bar{\Psi}(Px)\gamma^\mu \p_\mu\Psi(Px).
+\end{equation}
+Thus the Dirac Lagrangian is even under parity. It is also easy to construct Lagrangians that are parity odd. We could have instead built terms of the form $-\mathcal{L}_L + \mathcal{L}_R$, or by using a final gamma matrix:
+\begin{equation}
+    \gamma^5 = \m{-\II & 0 \\ 0 & \II} = \text{diag}(-1, -1, 1, 1).
+\end{equation}
+For example, a parity odd kinetic term would simply be:
+\begin{equation}
+    i\bar{\Psi}\gamma^\mu \gamma^5\p_\mu \Psi
+\end{equation}
+without the $\gamma^5$, this evaluates to $i\psi^\dag_L \bar{\sigma}^\mu \p_\mu \psi_L + i\psi_R^\dagger \sigma^\mu \p_\mu \psi_R$. With it, it flips the sign of the left part, so:
+\begin{equation}
+    i\bar{\Psi}\gamma^\mu \gamma^5\p_\mu \Psi = -i\psi^\dag_L \bar{\sigma}^\mu \p_\mu \psi_L + i\psi_R^\dagger \sigma^\mu \p_\mu \psi_R.
+\end{equation}
+We could also have a parity odd mass term:
+\begin{equation}
+    \tilde{m}i\bar{\Psi}\gamma^5 \Psi = i\tilde{m}(\psi_L^\dag \psi_R^\dag)\gamma^0 \gamma^5 \m{\psi_L \\ \psi_R} = i\tilde{m}(\psi_L^\dag \psi_R^\dag)\m{0 & \II \\ -\II & 0} \m{\psi_L \\ \psi_R} = i\tilde{m}(\psi_L^\dag\psi_R - \psi_R^\dag\psi_L)
+\end{equation}
+It is pretty clear that this is parity odd by looking at the Weyl fermions, but in fact we can check this directly from the expressions for the Dirac fermions. Using that:
+\begin{equation}
+    \set{\gamma^5, \gamma^0} = \gamma^5\gamma^0 + \gamma^0 \gamma^5 = \m{0 & -\II \\ \II & 0} + \m{0 & \II \\ -\II & 0} = 0
+\end{equation}
+(and in fact $\set{\gamma^5, \gamma^\mu} = 0$) we find:
+\begin{equation}
+    \bar{\Psi}\gamma^5\Psi \to \Psi^\dag \gamma^0\gamma^0\gamma^5\gamma^0\Psi = -\Psi^\dag \gamma^0\gamma^5 \Psi = -\bar{\Psi}\gamma^5\Psi
+\end{equation}
+Now that we have the $\gamma$s, it is easy to build bi-spinor objects in a given Lorentz representation. For parity-even, we have scalars:
+\begin{equation}
+    \bar{\Psi}\Psi, \bar{\Psi}\square\Psi, \ldots
+\end{equation}
+we have vectors:
+\begin{equation}
+    \bar{\Psi}\gamma_\mu\Psi, \ldots
+\end{equation}
+we have tensors:
+\begin{equation}
+    \bar{\Psi}\gamma_\mu\gamma_\nu\Psi, \ldots
+\end{equation}
+and if we want axial/parity-odd objects we can insert $\gamma^5$s. For example axial scalars:
+\begin{equation}
+    \bar{\Psi}\gamma^5\Psi, \ldots
+\end{equation}
+axial vectors:
+\begin{equation}
+    \bar{\Psi}\gamma^5\gamma_\mu \Psi, \ldots
+\end{equation}
+and axial tensors:
+\begin{equation}
+    \bar{\Psi}\gamma^5\gamma_\mu\gamma_\nu \Psi, \ldots
+\end{equation}

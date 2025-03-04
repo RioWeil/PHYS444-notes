@@ -1,0 +1,196 @@
+\section{The Free Dirac QFT}
+\subsection{Reviewing the General Solution}
+We found that the general solution to the Dirac equation took the form:
+\begin{equation}\label{eq:psix}
+    \psi(x) = \sum_{s=\pm}\int \frac{d^3p}{(2\pi)^32\e_\v{p}}\left[b_s(\v{p})u_s(\v{p})e^{ipx} + d^\dag(\v{p})v_s(\v{p})e^{-ipx}\right]
+\end{equation}
+With:
+\begin{equation}
+    u_+(\v{0}) = \sqrt{m}\m{1\\0\\1\\0}, \quad u_-(\v{0})=\sqrt{m}\m{0\\1\\0\\1}, \quad v_+(\v{0}) = \sqrt{m}\m{0\\1\\0\\-1}, \quad v_-(\v{0}) = \sqrt{m}\m{-1\\0\\1\\0}
+\end{equation}
+the spinors in the rest frame, and:
+\begin{equation}
+    u_s(\v{p}) = \exp(i\sinh^{-1}(\frac{\abs{\v{p}}}{m})\hat{\v{p}}\cdot\v{k})u_s(\v{0})
+\end{equation}
+(same for the $v_s$) which are the spinors in an arbitrary frame (boosted from the rest frame via $D(\Lambda) = \exp(i\sinh^{-1}(\frac{\abs{\v{p}}}{m})\hat{\v{p}}\cdot\v{k})$). The generators are:
+\begin{equation}
+    K^i = \m{i\sigma_{i}/2 & 0 \\ 0 & -i\sigma_i/2}, \quad J^i = \m{\sigma_i/2 & 0 \\ 0 & \sigma_i/2}
+\end{equation}
+
+\subsection{Spinor relations}
+We note that we have the boosted spinor:
+\begin{equation}
+    u_s(\v{p}) = D(\Lambda)u_s(\v{p})
+\end{equation}
+and also the barred spinor:
+\begin{equation}
+    \bar{u}_s(\v{p}) = u_s^\dag(\v{p})\gamma^0 = u_s^\dag(\v{0})D(\Lambda)^\dagger \gamma^0 = \bar{u}_s(\v{0})\gamma^0D(\Lambda)^\dagger \gamma^0 = \bar{u}_s(\v{0}) D(\Lambda)^{-1}
+\end{equation}
+where we note that $\gamma^0 = \m{0 & \II \\ \II & 0}$ and so $\gamma^0 K_i \gamma^0 = -K_i$ so with the $\theta \leftrightarrow \theta$ flip from the dagger operation we indeed get the inverse transformation. Note that we get simple orthogonality relations between the $u, v$s from studying them in the rest frame:
+\begin{equation}
+    \bar{u}_s(\v{p})u_{s'}(\v{p}) = \bar{u}_s(\v{0})D(\Lambda)^{-1}D(\Lambda)u_{s'}(\v{0}) = \bar{u}_s(\v{0})u_{s'}(\v{0}) = 2m\delta_{ss'}
+\end{equation}
+\begin{equation}
+    \bar{v}_s(\v{p})\bar{v}_{s'}(\v{p}) = \bar{v}_s(\v{0})v_{s'}(\v{0}) = v_{s'}^\dag(\v{0})\gamma^0v_s(\v{0}) = -2m\delta_{ss'}
+\end{equation}
+Note that for the $v$s we have minus signs inside of the spinor, so explicitly the $\gamma^0$ becomes relevant.
+\begin{equation}
+    \bar{v}_s(\v{p})u_{s'}(\v{p}) = 0.
+\end{equation}
+Let's try computing a slightly more complicated object:
+\begin{equation}
+    \bar{u}_s(\v{p})\gamma^\mu u_{s'}(\v{p}) = \bar{u}_s(\v{0})D(\Lambda)^{-1}\gamma^\mu D(\Lambda)u_{s'}(\v{0}) = \Lambda^{\mu}_{\sp\nu}\bar{u}_s(\v{0})\gamma^\nu u_{s'}(\v{0}) = \Lambda^{\mu}_{\sp\nu}2m\delta^{\nu}_0 \delta_{ss'} = 2p^\mu \delta_{ss'}
+\end{equation}
+which we could have partly guessed. There is a very similar equation for the $v$s:
+\begin{equation}
+    \bar{v}_s(\v{p})\gamma^\mu v_{s'}(\v{p}) = 2p^\mu \delta_{ss'}
+\end{equation}
+Finally:
+\begin{equation}
+    \bar{u}_s(\v{p})\gamma^0 v_{s'}(-\v{p}) = u_s^\dag(\v{p})v_{s'}(-\v{p}) = u_s^\dag (\v{0})D(\Lambda)^\dagger D(\Lambda_{-\v{p}})v_{s'}(\v{0}) = u_s^\dag (\v{0})\exp(i\eta\hat{\v{p}} \cdot \v{K})\exp(-i\eta\hat{\v{p}} \cdot \v{K})v_{s'}(\v{0}) = u_s^\dag (\v{0})v_{s'}(\v{0})= 0
+\end{equation}
+
+\subsection{Dirac reation and Annihilation Operators}
+We will promote $\psi$s to fermionic anticommuting operators. This is fine and dandy, but to extract what the behaviour of $b/d^\dag$ are we will have to use the above spinor technology.
+
+First, let's fourier transform Eq. \eqref{eq:psix}:
+\begin{equation}
+    \int d^3x e^{-i\v{p}\cdot\v{x}}\psi(x) = \sum_{s=\pm}\frac{1}{2\e_{\v{p}}}[b_s(\v{p})u_s(\v{p}) + d^\dag_s(-\v{p})v_s(-\v{p})]
+\end{equation}
+Now, we act on the above with $\bar{u}_s(\v{p})\gamma^0$ and use our spinor relations we derived in the previous section:
+\begin{equation}
+    \begin{split}
+        \int d^3xe^{-i\v{p}\cdot\v{x}}\bar{u}_s(\v{p})\gamma^0\psi(x) &= \sum_{s=\pm}\frac{1}{2\e_{\v{p}}}(b_s(\v{p})\bar{u}_s(\v{p})\gamma^0u_{s'}(\v{p}) + d^\dag_s(-\v{p})\bar{u}_s(\v{p})\gamma^0v_s(-\v{p}))
+        \\ &= \sum_{s=\pm}\frac{1}{2\e_{\v{p}}}(b_s(\v{p})2p^0\delta_{ss'} + 0)
+        \\ &= b_s(\v{p})
+    \end{split}
+\end{equation}
+The analogous barred relation is:
+\begin{equation}
+    \int d^3x e^{i\v{p}\cdot\v{x}}\bar{\psi}(x)\gamma^0u_s(\v{p}) = b_s^\dag(\v{p}).
+\end{equation}
+
+Via canonical quantization, we promote the $\psi$s to operators with the equal time commutation relations:
+\begin{equation}
+    \set{\psi_a(\v{x}), \psi^\dag_b(\v{0})} = \delta_{ab}\delta^3(\v{x})
+\end{equation}
+\begin{equation}
+    \set{\psi(\v{x}), \psi(\v{0})} = 0
+\end{equation}
+From this we find that:
+\begin{equation}
+    \set{b, b} = \set{b^\dag, b^\dag} = 0
+\end{equation}
+as out expressions for $b, b^\dag$ only involve $\psi, \psi^\dag$s respectively. The only nontrivial relation is the anticommutator between $b$ and $b^\dag$:
+\begin{equation}
+    \begin{split}
+        \set{b_s(\v{p}), b_{s'}^\dag(\v{p}')} &= \int d^3xd^3x' e^{-i(\v{p}\cdot\v{x} - \v{p}'\cdot\v{x}')}\set{\bar{u}_s(\v{p})\gamma^0 \psi(\v{x}), \bar{\psi}(\v{x}')\gamma^0u_s(\v{p})}
+        \\ &= \int d^3xd^3x' e^{-i(\v{p}\cdot\v{x} - \v{p}'\cdot\v{x}')} (\bar{u}_s(\v{p})\gamma^0)^a\set{\psi_a(\v{x}), \psi^\dag_b(\v{0})}(\gamma^0\gamma^0u_s(\v{p}))_b 
+        \\ &= \int d^3xd^3x' e^{-i(\v{p}\cdot\v{x} - \v{p}'\cdot\v{x}')} (\bar{u}_s(\v{p})\gamma^0)^a\delta_{ab}\delta^3(\v{x}-\v{x}')(\gamma^0\gamma^0u_s(\v{p}))_b 
+        \\ &= \int d^3xd^3x' e^{-i(\v{p}\cdot\v{x} - \v{p}'\cdot\v{x}')}\delta^3(\v{x}-\v{x}') \bar{u}_s(\v{p})\gamma^0u_{s'}(\v{p}')
+        \\ &= \int d^3x e^{-i(\v{p}-\v{p}')\cdot\v{x}} \bar{u}_s(\v{p})\gamma^0u_{s'}(\v{p}')
+        \\ &= \int d^3x e^{-i(\v{p}-\v{p}')\cdot\v{x}}  \delta_{ss'}2p^0
+        \\ &= (2\pi)^3\delta^3(\v{p}-\v{p}')\delta_{ss'}2\e_{\v{p}}
+    \end{split}
+\end{equation}
+Now we can do the same with the $d$s. Act on Eq. \eqref{eq:psix} with $\bar{v}_s(-\v{p})\gamma^0$. We then obtain:
+\begin{equation}
+    d_s^\dag(-\v{p}) = \int d^3x e^{-i\v{p}\cdot\v{x}}v_s(-\v{p})\gamma^0\psi(x)
+\end{equation}
+and flipping $\v{p} \to -\v{p}$:
+\begin{equation}
+    d_s^\dag(\v{p}) = \int d^3x e^{i\v{p}\cdot\v{x}}v_s(\v{p})\gamma^0\psi(x)
+\end{equation}
+Taking the dagger of this relation:
+\begin{equation}
+    d_s(\v{p}) = \int d^3x e^{-i\v{p}\cdot\v{x}}\bar{\psi}(x)\gamma^0 v_s(\v{p})
+\end{equation}
+So then:
+\begin{equation}
+    \set{d, d} = \set{d^\dag, d^\dag} = 0
+\end{equation}
+and again the only nontrivial relation is between $d, d^\dag$:
+\begin{equation}
+    \begin{split}
+        \set{d_s^\dag(\v{p}), d_{s'}(\v{p}')} &= \int_{\v{x}\v{x}'}e^{i(\v{p} \cdot \v{x} - \v{p}'\cdot\v{x}')}\set{\bar{v}_s(\v{p})\gamma^0\psi(\v{x}), \psi^\dag(\v{x}')\gamma^0v_s(\v{p}')}
+        \\ &= \int_{\v{x}\v{x}'}e^{i(\v{p} \cdot \v{x} - \v{p}'\cdot\v{x}')} \delta^3(\v{x}-\v{x}')\bar{v}_s(\v{p})\gamma^0v_{s'}(\v{p}')
+        \\ &= \int d^3x e^{i(\v{p} - \v{p}')\cdot\v{x}} 2p^0\delta_{ss'}
+        \\ &= (2\pi)^3\delta^3(\v{p} - \v{p}')2\e_{\v{p}}\delta_{ss'}
+    \end{split}
+\end{equation}
+We are almost done. The last thing to check is that the $b, d$ sets of creation/annihilation operators are independent, i.e. that they anticommute. It is clear that:
+\begin{equation}
+    \set{d^\dag, b} = \set{d, b^\dag} = 0
+\end{equation}
+and the only potentially nontrivial one we should work through is between $b, d$:
+\begin{equation}
+    \begin{split}
+        \set{b_s(\v{p}), d_{s'}(\v{p}')} &= \int_{\v{x}\v{x}'}e^{-i(\v{p}\cdot\v{x} - \v{p}'\cdot\v{x}')}\set{\bar{u}_s(\v{p})\gamma^0\psi(x), \bar{\psi}(x)\gamma^0v_{s'}(\v{p}')}
+        \\ &= \int_{\v{x}\v{x}'}e^{-i(\v{p}\cdot\v{x} - \v{p}'\cdot\v{x}')}\delta^3(\v{x}-\v{x}')\bar{u}_s(\v{p})\gamma^0v_{s'}(\v{p}')
+        \\ &= (2\pi)^3\delta^3(\v{p} + \v{p}')\bar{u}_s(\v{p})\gamma^0v_{s'}(-\v{p})
+        \\ &= 0
+    \end{split}
+\end{equation}
+so we indeed find that the $b, d$ are independent. The bottom line is we have 4 independent raising and lowering operators $b_\pm, d_\pm$. Notice that $b^\dag \sim \psi^\dag$ while $d^\dag \sim \psi$, so they create particles of opposite ``charge''. What charge?
+\begin{equation}
+    \mathcal{L} = \bar{\psi}(i\slashed{\p} - m)\psi
+\end{equation}
+has a $U(1)$ symmetry $\psi \to e^{i\alpha}\psi$. Symmetries imply conservation laws via Noether's theorem - we have the conserved current $\p_\mu j^\mu = 0$. We can identify the Noether charge:
+\begin{equation}
+    Q = \int d^3x j^0
+\end{equation}
+which is conserved with $\dot{Q} = 0$. Indeed, we find that:
+\begin{equation}
+    [Q, \psi^\dag] = i\psi^\dag, \quad [Q, \psi] = -i\psi
+\end{equation}
+so the two have opposite charge. When we talk about the electron, this Noether charge is just the familiar electric charge, and this is indeed how the Noether charge got its name.
+
+\subsection{Hilbert space of the Dirac Fermion}
+We start with the vacuum state $\ket{0}$ annihilated by all annihilation operators:
+\begin{equation}
+    b_s(\v{p})\ket{0} = d_s(\v{p})\ket{0} = 0 \quad \forall s, \v{p}
+\end{equation}
+We then have the single particle states:
+\begin{equation}
+    b_s^\dag(\v{p})\ket{0} = \ket{\v{p}, s, +1}
+\end{equation}
+which in contrast to the scalar single particle states (which were only labelled by their momentum), are labelled by momentum, spin, and charge. Analogously:
+\begin{equation}
+    d_s^\dag(\v{p})\ket{0} = \ket{\v{p}, s, -1}
+\end{equation}
+So for example $\ket{\v{p}, \uparrow, +1} = b^\dag_{\uparrow}(\v{p})\ket{0}$ corresponds to an electron\footnote{Let's take the electron to have positive charge, for now...} with momentum $\v{p}$ and $s_z = +\frac{1}{2}$ and $\ket{\v{p}', \downarrow, -1} = d^\dag_{\downarrow}(\v{p})\ket{0}$ corresponds to a positron with momentum $\v{p}$ and spin $s_z = -\frac{1}{2}$. Multiparticle states are then obtained as:
+\begin{equation}
+    \begin{split}
+        \ket{\ldots, (\v{p}_1, s_1, q_1), \ldots, (\v{p}_2, s_2, q_1), \ldots} &= \ldots b^\dag_{s_1}(\v{p}_1)d^\dag_{s_2}(\v{p}_2)\ldots\ket{0}
+        \\ &= \ket{\ldots, n_{\v{p}_1, s_1, q_1} = 1, \ldots, n_{\v{p}_2, s_2, q_2} = 1, \ldots}
+    \end{split}
+\end{equation}
+so we have a bunch of QHO modes labelled by three quantum numbers, but with the distinction to the bosonic case that each mode can only have occupation $ n=0/1$. This is because of the Pauli exclusion principle:
+\begin{equation}
+    b_{s}^\dag(\v{p})b_s^\dag(\v{p}) = \frac{1}{2}\set{b_{s}^\dag(\v{p}), b_{s}^\dag(\v{p})} = 0
+\end{equation}
+
+What is the energy of these particles? We should be able to get this from looking at the commutator of the $b$s with the Hamiltonian:
+\begin{equation}
+    \begin{split}
+        [H, b_s(\v{p})] &= -[b_s(\v{p}), H] 
+        \\ &= -\int_{\v{x},\v{x}'}e^{-ipx}[\bar{u}_s(\v{p})\gamma^0\psi(x), \bar{\psi}(x')(-i\gamma^i\p_i + m)\psi(x')]
+        \\ &= -\int_{\v{x},\v{x}'}e^{-ipx}\bar{u}_s(\v{p})\gamma^0\set{\psi(x), \psi^\dag(x')}i\gamma^0\gamma^0\p_0 \psi(x')
+        \\ &= -\int_{\v{x},\v{x}'}e^{-ipx}\bar{u}_s(\v{p})\gamma^0\delta^3(\v{x}-\v{x}')i\gamma^0\gamma^0\p_0 \psi(x')
+        \\ &= -\int d^3x e^{-ipx} \bar{u}_s(\v{p})\gamma^0i\p_0\psi(x)
+        \\ &\stackrel{IBP}{=} -p^0\int d^3x e^{-ipx} \bar{u}_s(\v{p})\gamma^0\psi(x)
+        \\ &= -\e_\v{p}b_s(\v{p})
+    \end{split}
+\end{equation}
+So $b_s(\v{p})$ lowers the energy by $\e_\v{p} = \sqrt{\v{p}^2 + m^2}$, as expected. Note that the final Hamiltonian has a very simple form in terms of the raising and lowering operators (very similar to the Hamiltonian of a scalar QFT):
+\begin{equation}
+    H = \sum_s \int \frac{d^3p}{(2\pi)^32\e_{\v{p}}}\e_{\v{p}}(b_s^\dag(\v{p})b_s(\v{p}) + d_s^\dag(\v{p})d_s(\v{p}))
+\end{equation}
+So this is $H$! What we will then do next week is to study our first fermionic observables in the form of propagators:
+\begin{equation}
+    \bra{0}\psi_a(\v{x})\bar{\psi}_b(\v{y})\ket{0}
+\end{equation}
+\begin{equation}
+    \bra{0}\mathcal{T}\psi_a(\v{x})\bar{\psi}_b(\v{y})\ket{0}
+\end{equation}
+We will do a lot of work to get a simple answer, then wonder if there was a simpler way, and in fact we will find that the simple method is using the path integral - the twist there will be that we integrate over a Grassman variable.

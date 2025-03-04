@@ -1,0 +1,203 @@
+\section{Fermions - Representations of Lorentz}
+
+\subsection{Introduction}
+In QFTI we explored scalar QFT deeply; both perturbatively and non-perturbatively. We looked at the path integral formalism, renormalization, and scattering. But the elephant in the room is we did this all with scalar fields, and most particles in the universe... are not. They transform with different representations of the Lorentz group; the scalar field is simply the simplest one. 
+
+In this course, we will look at fermions; they are qualitatively different due to Pauli exclusion and will lead to new physics. Building on this, we can build Lagrangians in 3+1 dimensions with dimensionless couplings, and moreover different kinds of dimensionless couplings. This will lead us into quantum electrodynamics eventually; but let's start with a discussion of fermions.
+
+\subsection{Representations of the Lorentz group; scalar and vector representations}
+Recall the Lorentz group $O(1, 3)$; it consists of all transformations that leaves spacetime distance invariant, i.e. all transformations:
+\begin{equation}
+    x^\mu \to \Lambda^\mu_{\nu}x^\nu
+\end{equation}
+such that:
+\begin{equation}
+    \Lambda^{\mu}_\alpha\Lambda^\nu_\beta \eta^{\alpha\beta} = \eta^{\mu\nu}
+\end{equation}
+with $\eta = \text{diag}(-1, 1, 1, 1)$ the Minkowski metric.
+
+We have already studied its simplest representation on fields, the scalar field:
+\begin{equation}
+    \phi(x) \to \phi'(x') = \phi(x)
+\end{equation}
+This is not a trivial representation (the field does transform), but in a way that is completely absorbed by the transformation of the coordinates.
+
+This is realized on Hilbert space/quantum fields $\hat{\phi}$ by a unitary operator:
+\begin{equation}
+    \hat{\phi}(x) \to U(\Lambda)^{-1}\hat{\phi}(x)U(\Lambda) = \hat{\phi}(\Lambda^{-1}x).
+\end{equation}
+
+Out of scalar fields, we could build composite objects that transform in potentially other representations. The simplest example is taking higher powers of the field, $[\phi(x)]^n$ still transforms as a scalar. But, consider $A_\mu = \p_{x^\mu}\phi(x)$; this transforms in a 4-vector representation:
+\begin{equation}
+    A_\mu(x) \equiv \p_{x^\mu}\phi(x) \to U(\Lambda)^{-1}\p_{x^\mu}\phi(x)U(\Lambda) = \p_{x^\mu}\phi(\Lambda^{-1}x) = \p_{x^\mu}\phi(\bar{x}) = \frac{\partial \bar{x}^\nu}{\partial \bar{x}^\mu}\p_{x^\mu}\phi(\bar{x}) = \Lambda^{\sp \nu}_{\mu}\p_{\bar{x}^\nu}\phi(\bar{x})
+\end{equation} 
+Where in the last equality we use that new coordinates are linearly related to the old coordinates, with:
+\begin{equation}
+    \frac{\partial \bar{x}^\nu}{\partial x^\mu} = (\Lambda^{-1})^{\mu}_{\sp\nu} = \Lambda^{\sp \nu}_{\mu}
+\end{equation}
+And thus:
+\begin{equation}
+    A_\mu(x) \to \Lambda^{\sp \nu}_{\mu}A_\nu(\bar{x})
+\end{equation}
+or:
+\begin{equation}
+    U(\Lambda)^{-1}A_\mu(x)U(\Lambda) = \Lambda_{\mu}^{\sp\nu} A_\nu(\Lambda^{-1}x)
+\end{equation}
+Under the spatial rotation subgroup $O(3) \subset O(1, 3)$, this splits into a scalar part for the time component $A_0$ and a 3-vector part for the spatial components $A_i$.
+
+The photon is a particle in this 4-vector representation of Lorentz. In that case, $A_\mu$ is the (fundamental) group field in Maxwell's equations, with the field:
+\begin{equation}
+    F_{\mu\nu} = \p_\mu A_\nu - \p_\nu A_\mu
+\end{equation}
+or:
+\begin{equation}
+    E_i = \p_0 A_i - \p_i A_0, \quad B_i = \e_{ijk}\p_jA_k
+\end{equation}
+
+\subsection{General Representation of Lorentz}
+We will come back to the photon later in the course, but let us turn to the question of building a general representation of the Lorentz group. To this end, we study its algebra. It contains the generator of rotations $J_i$:
+\begin{equation}
+    [J_i, J_j] = i\e_{ijk}J_k \quad \text{($\mathfrak{su}(2)$ algebra)}
+\end{equation}
+which forms a subalgebra. It also contains the generator of boosts $K_i$:
+\begin{equation}
+    [K_i, K_j] = -i\e_{ijk}J_k
+\end{equation}
+\begin{equation}
+    [J_i, K_j]= i\e_{ijk}K_k.
+\end{equation}
+but the $K_i$ do not form a closed subalgebra. Rotations and boosts together form the full Lorentz algebra, which we derived last quarter through the study of infinitesimal transformations.
+
+We consider the following linear combinations of generators:
+\begin{equation}
+    J_i^\pm = \frac{1}{2}(J_i \pm iK_i).
+\end{equation}
+It can be easily checked that the $J^+$s form a closed subalgebra:
+\begin{equation}
+    [J_i^+, J_j^+] = \frac{1}{4}[J_i + iK_i, J_j + iK_j] = \frac{1}{2}(i\e_{ijk}J_k - \e_{ijk}K_k) = i\e_{ijk}\frac{1}{2}(J_k + iK_k) = i\e_{ijk}J^+
+\end{equation}
+Moreover the $J^+$s commute with the $J^-$s:
+\begin{equation}
+    [J_i^+, J_j^-] = \frac{1}{4}[J_i + iK_i, J_j - iK_j] = 0.
+\end{equation}
+and the $J^-$s have the same commutation relation with each other as the $J^+$s:
+\begin{equation}
+    [J_i^-, J_j^-] = i\e_{ijk}J^-_k
+\end{equation}
+Thus, we conclude that the Lorentz algebra is just 2 commuting $\mathfrak{su}(2)$ algebras! We thus conclude that:
+\begin{equation}
+    \mathfrak{so}(1, 3) = \mathfrak{su}(2) \oplus \mathfrak{su}(2)
+\end{equation}
+The usual representation of $\mathfrak{su}(2)$ is labelled by a half-integer, and thus the irreducible representations of the Lorentz group are thus labelled by two half-integers $(j^-, j^+)$, with:
+\begin{equation}
+    j^\pm = 0, \frac{1}{2}, 1, \frac{3}{2}, \ldots
+\end{equation}
+Thus a general field $\Psi_{ab}(x)$ has two indices, with $a = 1, \ldots, 2j_- + 1$ and $b = 1, \ldots, 2j_+ + 1$.
+
+\subsection{Examples of Lorentz Representations}
+For a scalar field, we have the $(0, 0)$ representation. In this case, the indices $a, b$ run from 1 to 1 so we just omit the indices and write $\phi(x)$.
+
+For rotations, we have $J_i = J^+_i + J^-_i$. The $(j^-, j^+)$ irrep (irreducible representation) of Lorentz therefore decomposes into spin:
+\begin{equation}
+    \abs{j^- - j^+}, \abs{j^- - j^+} + 1, \ldots, j^- + j^+
+\end{equation}
+under rotations.
+
+Let's look at a slightly more interesting example. What is the 4-vector representation? A first guess is that a vector looks like spin-1, so we might put $(1, 0)$; but this doesn't work because under rotation it doesn't split into a scalar rotation $A_0$ and a 3-vector $A_i$. Thus, the correct representation turns out to be $(\frac{1}{2}, \frac{1}{2})$. Under spatial rotation, this decomposed into a spin 0 $(A_0)$ and spin 1 $(A_i)$ piece, which is what we need.
+
+This skipped one representation though! What about $(\frac{1}{2}, 0)$ or $(0, \frac{1}{2})$ (these are the smallest non-scalar irreps)? Well, first note that these reps are related by a parity $\v{x} \to -\v{x}$, as under this reflection angular momentum is invariant and boosts are flipped, i.e.:
+\begin{equation}
+    \v{J} \to \v{J}, \quad \v{K} \to -\v{K}
+\end{equation}
+and so:
+\begin{equation}
+    J_i^\pm \to J_i^\mp
+\end{equation}
+Hence a $(\frac{1}{2}, 0)$ particle cannot be parity invariant on its own. We will later study these in ``chiral'' theories. This rep is the left or right handed Weyl (or Majorana\footnote{in 3+1 dimensions they coincide, but in other dimensions they differ, hence the two different names.}) spinor.
+
+\subsection{Properties of the Weyl spinor}
+
+We're in the USA, so let's pick the right-handed representation $(0, \frac{1}{2})$. In this rep:
+\begin{equation}
+    J_+^i = \frac{1}{2}\sigma^i
+\end{equation}
+which satisfy:
+\begin{equation}
+    [J_+^i, J_+^j] = i\e_{ijk}J_k
+\end{equation}
+which is a 2-d rep of $\mathfrak{su}(2)_+$. The minus matrices are trivial, with:
+\begin{equation}
+    J_-^i = 0.
+\end{equation}
+giving the 1-d rep of $\mathfrak{su}(2)_-$. These two objects act on different spaces (one on the right, one on the left index). If we want to see them as the representation of the entire group $SU(2) \times SU(2)$, we can write:
+\begin{equation}
+    J_i^+ = \II \otimes \frac{1}{2}\sigma_i, \quad J_i^- = 0 \otimes \II
+\end{equation}
+From this we can also get the generators of rotations and boosts:
+\begin{equation}
+    J_i = J_i^+ + J_i^- = \frac{1}{2}\sigma_i
+\end{equation}
+\begin{equation}
+    K_i = \frac{1}{i}(J_i^+ - J_i^-) = -\frac{i}{2}\sigma_i
+\end{equation}
+We therefore have a 2-d representation of Lorentz $(0, \frac{1}{2})$ on fields $\psi_R = \m{\psi_1 \\ \psi_2}$. For a Lorentz transformation $\Lambda$ of angles $\theta_i$ and rapidities $\eta_i$, i.e. $\Lambda = e^{i(\theta^i J_i + \eta^i K_i)}$, we have the fields transform as:
+\begin{equation}
+    U(\Lambda)^{-1}\psi_R(x)U(\Lambda) = e^{\frac{i}{2}(\theta_i - i\eta^i)\sigma_i}\psi_R(\Lambda^{-1}x)
+\end{equation}
+note that the rotation part is unitary but the boost part is not. Because the boost generators are related to the $J^\pm$s via an $i$, in any representation it will be anti-unitary:
+\begin{equation}
+    K_i^\dagger = -K_i
+\end{equation}
+but do not confuse this with the full transformation on the Hilbert space, which is always unitary. Another comment; this implies that $\psi_R$ must be complex, as the transformation does not take real to real. In fact, the anti-unitarity of the $K_i$s implies that $\psi_R^*$ transforms in the parity flipped $(\frac{1}{2}, 0)$ representation.
+
+Another interesting feature of this representation is that under a $2\pi$ rotation, say, around the $\zhat$ axis (so $\theta^z = 2\pi$), the field transforms to:
+\begin{equation}
+    \psi_R'(x) = e^{\frac{i}{2}(2\pi \sigma_z)}\psi_R(\Lambda^{-1}x) = e^{i\pi \sigma_z}\psi_R(x) = -\psi_R(x)
+\end{equation}
+note that $\Lambda^{-1}x = x$ as the coordinate comes back to itself. So, in scalar field theory a $2\pi$ rotation leaves the field invariant. But here, the field does \emph{not} transform back into itself due to the negative sign out front. This is a first hint of the spin-statistics theorem, which we will soon discuss; but this theorem will tell us that the particles must be fermionic. The statistics are tied to the representation of the Lorentz group.
+
+\subsection{Building a Lagrangian for the Weyl spinor}
+Let us start by building a quadratic/Gaussian Lagrangian for $\psi_R$. We could try tensoring $\psi^*_{Ra}\psi_{Rb}$. Since $\psi_R \in (0, \frac{1}{2})$ and $\psi_R^* \in (\frac{1}{2}, 0)$, from group theory:
+\begin{equation}
+    \psi^*_{Ra}\psi_{Rb} \in (0, \frac{1}{2}) \otimes (\frac{1}{2}, 0) = (0 \otimes \frac{1}{2}, \frac{1}{2}\otimes 0) = (\frac{1}{2}, \frac{1}{2})
+\end{equation}
+which as we discussed previously, transforms like a 4-vector. But it doesn't look like one... it looks like a $2\times 2$ matrix. But there should be a way to map it to a 4-vector. What are the possible bilinears we can build? Well, we can consider:
+\begin{equation}
+    A_0 = \psi_R^\dagger \psi_R
+\end{equation}
+\begin{equation}
+    A_i = \psi_R^\dagger \sigma_i \psi_R
+\end{equation}
+How do these transform? Under infinitesimal transformations, we have that:
+\begin{equation}
+    \psi_R \to \psi_R' \approx (1  +iJ_i \theta_i)\psi_R = (1 + \frac{i}{2}\sigma_i\theta_i)\psi_R
+\end{equation}
+from these we can deduce how the other objects transform. Namely:
+\begin{equation}
+    A_0 \to \psi_R^\dagger(1 - \frac{i}{2}\sigma_i \theta_i)(1 + \frac{i}{2}\sigma_i \theta_i)\Psi_R \approx \psi_R^\dagger \psi_R
+\end{equation}
+which we see is invariant under infinitesimal transformations $\theta \ll 1$, making it a good candidate for $A_0$/the scalar part. Let's next consider $A_i$:
+\begin{equation}
+    A_i \to \psi_R^\dagger (1 - \frac{i}{2}\sigma_j\theta_j)\sigma_i(1 + \frac{i}{2}\sigma_j\theta_j)\psi_R \approx \psi_R^\dagger(\sigma_i + \frac{i}{2}[\sigma_i, \sigma_j]\theta_j)\Psi_R = A_i - \e_{ijk}\theta_jA_k
+\end{equation}
+This is how a 3-vector transfrms under spatial rotations, again justifying our guess for what the vector part $A_i$ should be as a good one. Repeating this exercise with boosts, one finds that the entire object is indeed a 4-vector under rotations:
+\begin{equation}
+    A_\mu \equiv \Psi_R^\dagger \sigma_\mu \Psi_R
+\end{equation}
+with:
+\begin{equation}
+    \sigma_\mu = (\sigma_0 = \II, \sigma_i = \text{Paulis})
+\end{equation}
+is a 4-vector field under rotations. To recap, we had group theory technology that told us that the product $\psi^*_{Ra}\psi_{Rb}$ should transform like a 4-vector. We then constructed a map which actually gave us what the 4 components should be, inspired by the group theoretic trick.
+
+Now that we know this, do we have ideas for what Lagrangians we can build out of the Weyl spinor? Note that the Lagrangian must be a scalar field. Consider as a first go\footnote{$A_\mu A^\mu$ is also a valid choice for Lorentz invariance, but is quartic in $\psi_R$, so we will consider it when we go to interacting theories}:
+\begin{equation}
+    \mathcal{L} = \p_\mu(\psi_R^\dagger \sigma^\mu \psi_R)
+\end{equation}
+but then this is a total derivative, so there is no interesting (bulk) physics. Refining our guess, let's let the derivative act on one of the fields:
+\begin{equation}
+    \mathcal{L} = i\psi_R^\dagger \sigma^\mu \p_\mu \psi_R
+\end{equation}
+which is indeed the Lagrangian for a (right-handed) Weyl spinor. It is qualitatively different from the scalar in that it only has one derivative (c.f. the scalar field Lagrangian had two derivatives) - the counting of degrees of degrees of freedom are different.
+
+On Thursday, we will try to construct a mass term. We will also remedy the fact that $\mathcal{L}$ is not a parity-invariant theory, which is something that we will need for electrons.
